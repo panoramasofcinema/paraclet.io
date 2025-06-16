@@ -3,6 +3,8 @@ declare module 'scramble-text' {
     constructor(element: HTMLElement, options?: {
       timeOffset?: number;
       chars?: string[];
+      fps?: number;
+      callback?: function;
     });
     start(): this;
     play(): this;

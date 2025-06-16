@@ -1,90 +1,74 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, RefObject } from 'react';
 import ScrambleText from 'scramble-text';
 import styles from './page.module.css';
 
 
-export default function Home() {
-  const titleRef = useRef(null);
-  const pitchRef = useRef(null);
-  const collabRef = useRef(null);
-  const officeRef = useRef(null);
+function useScrambleOnHover(
+  ref: RefObject<HTMLDivElement | null>,
+  options: ConstructorParameters<typeof ScrambleText>[1],
+  playOnMount = false
+) {
+  const scrRef = useRef<ScrambleText | null>(null);
 
-
+  // on-mount play if requested
   useEffect(() => {
-    const instances: ScrambleText[] = [];
-
-    if (titleRef.current) {
-      const titleScramble = new ScrambleText(titleRef.current,
-        {
-          timeOffset: 100,
-          chars: [
-            'P','a','r','c','l','e','t'
-          ]
-        }
-      )
-        .start()
-        .play();
-      instances.push(titleScramble);
-    }
-
-    if (pitchRef.current) {
-      const pitchScramble = new ScrambleText(pitchRef.current,
-        {
-          timeOffset: 10,
-          chars: [
-            'P','a','r','c','l','e','t'
-          ]
-        }
-      )
-        .start()
-        .play();
-      instances.push(pitchScramble);
-    }
-
-    if (collabRef.current) {
-      const collabScramble = new ScrambleText(collabRef.current,
-        {
-          timeOffset: 8,
-          chars: [
-            'P','a','r','c','l','e','t'
-          ]
-        }
-      )
-        .start()
-        .play();
-      instances.push(collabScramble);
-    }
-
-    if (officeRef.current) {
-      const officeScramble = new ScrambleText(officeRef.current,
-        {
-          timeOffset: 15,
-          chars: [
-            'P','a','r','c','l','e','t'
-          ]
-        }
-      )
-        .start()
-        .play();
-      instances.push(officeScramble);
-    }
-
-    return () => {
-      // clean up both instances
-      instances.forEach(inst => {
-        if (typeof inst.stop === 'function') {
-          inst.stop();
-        }
+    if (playOnMount && ref.current) {
+      const scr = new ScrambleText(ref.current, {
+        ...options,
+        callback: () => {
+          scr.stop();
+          scrRef.current = null;
+        },
       });
-    };
-  }, []);
+      scrRef.current = scr;
+      scr.start().play();
+    }
+  }, [playOnMount, ref, options]);
 
+  // hover handler: do nothing if one's still running
+  function handleHover() {
+    if (!ref.current || scrRef.current) return;
+    const scr = new ScrambleText(ref.current, {
+      ...options,
+      callback: () => {
+        scr.stop();
+        scrRef.current = null;
+      },
+    });
+    scrRef.current = scr;
+    scr.start().play();
+  }
+
+  return handleHover;
+}
+
+
+export default function Home() {
+  const titleRef = useRef<HTMLDivElement>(null);
+  const pitchRef = useRef<HTMLDivElement>(null);
+  const collabRef = useRef<HTMLDivElement>(null);
+  const officeRef = useRef<HTMLDivElement>(null);
+
+  const scrambleOpts = {
+    timeOffset: 30,
+    chars: ['P','a','r','a','c','l','e','t'],
+    fps: 6
+  };
+
+  const onTitleHover = useScrambleOnHover(titleRef, {
+    timeOffset: 60,
+    chars: ['P','a','r','a','c','l','e','t'],
+    fps: 6
+  }, true);
+  const onPitchHover = useScrambleOnHover(pitchRef, scrambleOpts, true);
+  const onCollabHover = useScrambleOnHover(collabRef, scrambleOpts, true);
+  const onOfficeHover = useScrambleOnHover(officeRef, scrambleOpts, true);
 
   return (
     <div className={styles.pageContainer}>
-      <div className={styles.pageTitle} ref={titleRef}>
+      <div className={styles.pageTitle} ref={titleRef} onMouseEnter={onTitleHover}>
         Paraclet
       </div>
 
@@ -92,22 +76,22 @@ export default function Home() {
         Request a demo
       </button>
 
-      <div className={styles.pitch} ref={pitchRef}>
+      <div className={styles.pitch} ref={pitchRef} onMouseEnter={onPitchHover}>
         We develop AI-native solutions for architecture professionals.
       </div>
 
-      <div className={styles.collaborators} ref={collabRef}>
+      <div className={styles.collaborators} ref={collabRef} onMouseEnter={onCollabHover}>
         Our collaborators include<br/>
         Pool Architekten<br/>
-        Jan De Vylder - A Studio<br/>
+        Jan De Vylder<br/>
         Studio Meteora<br/>
         Studio 0More
       </div>
 
-      <div className={styles.office} ref={officeRef}>
+      <div className={styles.office} ref={officeRef} onMouseEnter={onOfficeHover}>
         Office<br/>
         Paraclet<br/>
-        Geroldstrasse 31<br/>
+        Geroldstrasse 31b<br/>
         8005 Zurich<br/>
         Switzerland
       </div>
