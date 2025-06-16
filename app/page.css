@@ -8,7 +8,7 @@
 body {
     background-color: black;
     color: var(--foreground);
-    font-family: "Playfair Display", serif;
+    font-family: Times, serif;
     font-size: 14px;
     overflow-wrap: break-word;
     transition: background-color 0.3s, color 0.3s;
@@ -19,14 +19,14 @@ body {
     background-color: black;
     color: white;
     position: relative;
-    margin: 0;
-    padding: 0;
 }
 
 .page-title {
+    border: 1px red solid;
     position: absolute;
-    top: 1rem;
-    left: 1rem;
+    font-size: 25px;
+    top: 60px;
+    left: 30px;
 }
 
 .image-container {
