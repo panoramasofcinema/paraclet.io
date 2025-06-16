@@ -6,7 +6,6 @@
 }
 
 body {
-    margin: 0px;
     background-color: black;
     color: var(--foreground);
     font-family: "Playfair Display", serif;
@@ -16,29 +15,31 @@ body {
 }
 
 .page-container {
-  min-height: 100vh;
-  background-color: black;
-  color: white;
-  position: relative;
-  margin: 0;
-  padding: 0;
+    min-height: 100vh;
+    background-color: black;
+    color: white;
+    position: relative;
+    margin: 0;
+    padding: 0;
 }
 
 .page-title {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
 }
 
 .image-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+    /* border: red solid 1px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
 .center-image {
-  max-width: 500px;
-  max-height: 500px;
-  object-fit: contain;
+    /* border: blue solid 1px; */
+    max-width: 500px;
+    max-height: 500px;
+    object-fit: contain;
 }
