@@ -1,47 +1,47 @@
 'use client';
 
-import { useEffect, useRef, useState, RefObject } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ScrambleText from 'scramble-text';
 import styles from './page.module.css';
 
 
-function useScrambleOnHover(
-  ref: RefObject<HTMLDivElement | null>,
-  options: ConstructorParameters<typeof ScrambleText>[1],
-  playOnMount = false
-) {
-  const scrRef = useRef<ScrambleText | null>(null);
+// function useScrambleOnHover(
+//   ref: RefObject<HTMLDivElement | null>,
+//   options: ConstructorParameters<typeof ScrambleText>[1],
+//   playOnMount = false
+// ) {
+//   const scrRef = useRef<ScrambleText | null>(null);
 
-  // on-mount play if requested
-  useEffect(() => {
-    if (playOnMount && ref.current) {
-      const scr = new ScrambleText(ref.current, {
-        ...options,
-        callback: () => {
-          scr.stop();
-          scrRef.current = null;
-        },
-      });
-      scrRef.current = scr;
-      scr.start().play();
-    }
-  }, [playOnMount, ref, options]);
+//   // on-mount play if requested
+//   useEffect(() => {
+//     if (playOnMount && ref.current) {
+//       const scr = new ScrambleText(ref.current, {
+//         ...options,
+//         callback: () => {
+//           scr.stop();
+//           scrRef.current = null;
+//         },
+//       });
+//       scrRef.current = scr;
+//       scr.start().play();
+//     }
+//   }, [playOnMount, ref, options]);
 
-  // hover handler: do nothing if one's still running
-  function handleHover() {
-    if (!ref.current || scrRef.current) return;
-    const scr = new ScrambleText(ref.current, {
-      ...options,
-      callback: () => {
-        scr.stop();
-        scrRef.current = null;
-      },
-    });
-    scrRef.current = scr;
-    scr.start().play();
-  }
-  return handleHover;
-}
+//   // hover handler: do nothing if one's still running
+//   function handleHover() {
+//     if (!ref.current || scrRef.current) return;
+//     const scr = new ScrambleText(ref.current, {
+//       ...options,
+//       callback: () => {
+//         scr.stop();
+//         scrRef.current = null;
+//       },
+//     });
+//     scrRef.current = scr;
+//     scr.start().play();
+//   }
+//   return handleHover;
+// }
 
 
 export default function Home() {
@@ -81,10 +81,10 @@ export default function Home() {
     fps: 6
   };
 
-  const onTitleHover = useScrambleOnHover(titleRef, scrambleOptsSlow, false);
-  const onPitchHover = useScrambleOnHover(pitchRef, scrambleOpts, false);
-  const onCollabHover = useScrambleOnHover(collabRef, scrambleOpts, false);
-  const onOfficeHover = useScrambleOnHover(officeRef, scrambleOpts, false);
+  // const onTitleHover = useScrambleOnHover(titleRef, scrambleOptsSlow, false);
+  // const onPitchHover = useScrambleOnHover(pitchRef, scrambleOpts, false);
+  // const onCollabHover = useScrambleOnHover(collabRef, scrambleOpts, false);
+  // const onOfficeHover = useScrambleOnHover(officeRef, scrambleOpts, false);
 
   // Toggle language every 10 seconds
   useEffect(() => {
