@@ -64,18 +64,6 @@
   hyphens: auto;
 }
 
-.collaborators {
-  /* position: absolute;
-  top: 640px;
-  left: 30px; */
-}
-
-.office {
-  /* position: absolute;
-  top: 640px;
-  left: 660px; */
-}
-
 .cr {
   position: absolute;    /* or fixed, depending on your needs */
   top: calc(100vh + 10px);
