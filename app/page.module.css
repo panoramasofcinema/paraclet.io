@@ -1,25 +1,20 @@
 .pageContainer {
   /* border: 1px yellowgreen solid; */
+  display: flex;
+  flex-direction: column;
   position: relative;
-  min-height: 100vh;
-  color: black;
-  background-color: #FBFBFB;
+  height: 100vh;
+  max-height: 790px;
+  /* width: 1280px; */
 }
 
 .pageTitle {
-  /* border: 1px red solid; */
-  position: absolute;
-  top: 60px;
-  left: 30px;
-
-  font-size: 25px;
-  line-height: 25px;
-  letter-spacing: 3%; 
-
-  color: #1E1E1E;
+  /* position: absolute; */
+  margin-top: 22px;
+  margin-left: 30px;
 }
 
-.requestDemoButton {
+/* .requestDemoButton {
   position: absolute;
   width: 150px;
   height: 30px;
@@ -37,37 +32,59 @@
   border: 1px solid #DFDFDF;
   border-radius: 10px;
   background-color: #FFFFFFE5;
-}
+} */
 
 .pitch {
-  /* border: 1px red solid; */
-  position: absolute;
-  top: 340px;
-  left: 30px;
+  /* position: absolute; */
+  /* top: 340px; */
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top:  auto;
+  margin-bottom: auto;
+}
 
-  font-size: 25px;
-  line-height: 35px;
-  letter-spacing: 3%;
+.footer {
+  /* position: absolute; */
+  margin-left: 25px;
+  margin-left: 30px;
+  padding-bottom: 22px;
+  max-width: 1220px;
+  width: calc(100% - 60px);
+  display: flex;
+  gap: 30px;
+}
+
+.footer > * {
+  flex: 1 1 0;
+  min-width: 0;
+
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .collaborators {
-  /* border: 1px red solid; */
-  position: absolute;
-  top: 660px;
-  left: 30px;
-
-  font-size: 18px;
-  line-height: 25px;
-  letter-spacing: 3%;
+  /* position: absolute;
+  top: 640px;
+  left: 30px; */
 }
 
 .office {
-  /* border: 1px red solid; */
-  position: absolute;
-  top: 660px;
-  left: 660px;
+  /* position: absolute;
+  top: 640px;
+  left: 660px; */
+}
 
-  font-size: 18px;
-  line-height: 25px;
-  letter-spacing: 3%;
+.cr {
+  position: absolute;    /* or fixed, depending on your needs */
+  top: calc(100vh + 10px);
+  left: 30px;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    /* padding-bottom: 0px; */
+    hyphens: none;
+  }
 }

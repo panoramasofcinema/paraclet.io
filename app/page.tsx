@@ -2,46 +2,9 @@
 
 import { useEffect, useRef, useState } from 'react';
 import ScrambleText from 'scramble-text';
+import usePageVisibility from './usePageVisibility';
 import styles from './page.module.css';
 
-
-// function useScrambleOnHover(
-//   ref: RefObject<HTMLDivElement | null>,
-//   options: ConstructorParameters<typeof ScrambleText>[1],
-//   playOnMount = false
-// ) {
-//   const scrRef = useRef<ScrambleText | null>(null);
-
-//   // on-mount play if requested
-//   useEffect(() => {
-//     if (playOnMount && ref.current) {
-//       const scr = new ScrambleText(ref.current, {
-//         ...options,
-//         callback: () => {
-//           scr.stop();
-//           scrRef.current = null;
-//         },
-//       });
-//       scrRef.current = scr;
-//       scr.start().play();
-//     }
-//   }, [playOnMount, ref, options]);
-
-//   // hover handler: do nothing if one's still running
-//   function handleHover() {
-//     if (!ref.current || scrRef.current) return;
-//     const scr = new ScrambleText(ref.current, {
-//       ...options,
-//       callback: () => {
-//         scr.stop();
-//         scrRef.current = null;
-//       },
-//     });
-//     scrRef.current = scr;
-//     scr.start().play();
-//   }
-//   return handleHover;
-// }
 
 
 export default function Home() {
@@ -51,48 +14,47 @@ export default function Home() {
   const officeRef = useRef<HTMLDivElement>(null);
 
   const [lang, setLang] = useState<'en' | 'de'>('en');
+  const isVisible = usePageVisibility();
+
   const translations = {
     title: {
       en: 'Paraclet',
       de: 'Paraclet'
     },
     pitch: {
-      en: 'We develop AI-native solutions for architects and planners.',
-      de: 'Wir entwickeln KI-native Lösungen für Architekten und Planer.'
+      en: 'We develop AI-native solutions for architects and designers.',
+      de: 'Wir entwickeln KI-native Lösungen für Architekten und Designer.'
     },
     collab: {
-      en: 'Our collaborators include<br/>Pool Architekten<br/>Jan De Vylder<br/>Meteora<br/>Studio 0More',
-      de: 'Zu unseren Partnern zählen<br/>Pool Architekten<br/>Jan De Vylder<br/>Meteora<br/>Studio 0More'
+      en: 'Selected clients:<br/>pool Architekten<br/>a studio – jan de vylder<br/>Meteora ETH<br/>Studio 0More<br>',
+      de: 'Ausgewählte Kunden:<br/>pool Architekten<br/>a studio – jan de vylder<br/>Meteora ETH<br/>Studio 0More'
     },
     office: {
-      en: 'Office<br>Paraclet<br>Geroldstrasse 31b<br>8005 Zurich<br>Switzerland',
-      de: 'Büro<br>Paraclet<br>Geroldstrasse 31b<br>8005 Zürich<br>Schweiz'
+      en: 'Paraclet<br>Geroldstrasse 31b<br>8005 Zurich<br><br>office@paraclet.io<br>',
+      de: 'Paraclet<br>Geroldstrasse 31b<br>8005 Zürich<br><br>office@paraclet.io'
     }
   };
 
   const scrambleOpts = {
-    timeOffset: 30,
-    chars: ['p','a','r','a','c','l','e','t',' '],
-    fps: 6
+    timeOffset: 16,
+    chars: ['P','a','r','a','c','l','e','t',' '],
+    fps: 12
   };
   const scrambleOptsSlow = {
     timeOffset: 60,
-    chars: ['p','a','r','a','c','l','e','t',' '],
-    fps: 6
+    chars: ['P','a','r','a','c','l','e','t',' '],
+    fps: 12
   };
 
-  // const onTitleHover = useScrambleOnHover(titleRef, scrambleOptsSlow, false);
-  // const onPitchHover = useScrambleOnHover(pitchRef, scrambleOpts, false);
-  // const onCollabHover = useScrambleOnHover(collabRef, scrambleOpts, false);
-  // const onOfficeHover = useScrambleOnHover(officeRef, scrambleOpts, false);
-
-  // Toggle language every 10 seconds
+  // Toggle language every X seconds
   useEffect(() => {
-    const id = setInterval(() => {setLang((prev) => (prev === 'en' ? 'de' : 'en'));}, 7_000);
-    return () => clearInterval(id);
-  }, []);
+    if (!isVisible) return;
 
-  // scramble all three text areas on lang change
+    const id = setInterval(() => {setLang((prev) => (prev === 'en' ? 'de' : 'en'));}, 5_000);
+    return () => clearInterval(id);
+  }, [isVisible]);
+
+  // scramble all three text areas on language change
   useEffect(() => {
     [titleRef, pitchRef, collabRef, officeRef].forEach(ref => {
       if (!ref.current) return;
@@ -109,37 +71,20 @@ export default function Home() {
 
   return (
     <div className={styles.pageContainer}>
-      {/* <div className={styles.pageTitle} ref={titleRef} onMouseEnter={onTitleHover}> */}
       <div className={styles.pageTitle} ref={titleRef}>
         {translations.title[lang]}
       </div>
 
-      <button className={styles.requestDemoButton}>
-        Request a demo
-      </button>
-
-      {/* <div className={styles.pitch} ref={pitchRef} onMouseEnter={onPitchHover}> */}
       <div className={styles.pitch} ref={pitchRef}>
         {translations.pitch[lang]}
       </div>
 
-      {/* <div className={styles.collaborators} ref={collabRef} onMouseEnter={onCollabHover}> */}
-      <div className={styles.collaborators} ref={collabRef} dangerouslySetInnerHTML={{ __html: translations.collab[lang] }}>
-        {/* {translations.collab[lang]}
-        <br/>Pool Architekten
-        <br/>Jan De Vylder
-        <br/>Meteora
-        <br/>Studio 0More */}
+      <div className={styles.footer}>
+        <div className={styles.collaborators} ref={collabRef} dangerouslySetInnerHTML={{ __html: translations.collab[lang] }}></div>
+        <div className={styles.office} ref={officeRef} dangerouslySetInnerHTML={{ __html: translations.office[lang] }}></div>
       </div>
 
-      {/* <div className={styles.office} ref={officeRef} onMouseEnter={onOfficeHover}> */}
-      <div className={styles.office} ref={officeRef} dangerouslySetInnerHTML={{ __html: translations.office[lang] }}>
-        {/* {translations.office[lang]} */}
-        {/* <br/>Paraclet
-        <br/>Geroldstrasse 31b
-        <br/>8005 Zurich
-        <br/>Switzerland */}
-      </div>
+      <div className={styles.cr}>© 2025 Paraclet</div>
     </div>
   )
 }
