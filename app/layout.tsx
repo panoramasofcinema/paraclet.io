@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Paraclet",
-  description: "",
+  description: "AI-native solutions for architects and designers.",
 };
 
 export default function RootLayout({

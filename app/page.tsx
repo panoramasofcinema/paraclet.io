@@ -13,25 +13,41 @@ export default function Home() {
   const collabRef = useRef<HTMLDivElement>(null);
   const officeRef = useRef<HTMLDivElement>(null);
 
-  const [lang, setLang] = useState<'en' | 'de'>('en');
+  // const [lang, setLang] = useState<'en' | 'de'>('en');
+  const languages: Array<'en'|'de'|'en'|'fr'|'en'|'it'|'en'|'rm'> = ['en','de','en','fr','en','it','en','rm'];
+  const [langIndex, setLangIndex] = useState(0);
+  const lang = languages[langIndex];
+
   const isVisible = usePageVisibility();
 
   const translations = {
     title: {
       en: 'Paraclet',
-      de: 'Paraclet'
+      de: 'Paraclet',
+      fr: 'Paraclet',
+      it: 'Paraclet',
+      rm: 'Paraclet'
     },
     pitch: {
       en: 'We develop AI-native solutions for architects and designers.',
-      de: 'Wir entwickeln KI-native Lösungen für Architekten und Designer.'
+      de: 'Wir entwickeln KI-native Lösungen für Architekten und Designer.',
+      fr: 'Nous développons des solutions natives en IA pour les architectes et les designers.',
+      it: 'Sviluppiamo soluzioni native per l’IA destinate ad architetti e designer.',
+      rm: 'Nus sviluppain soluziuns nativas cun IA per architects ed indeschinaders.'
     },
     collab: {
       en: 'Selected clients:<br/>pool Architekten<br/>a studio – jan de vylder<br/>Meteora ETH<br/>Studio 0More<br>',
-      de: 'Ausgewählte Kunden:<br/>pool Architekten<br/>a studio – jan de vylder<br/>Meteora ETH<br/>Studio 0More'
+      de: 'Ausgewählte Kunden:<br/>pool Architekten<br/>a studio – jan de vylder<br/>Meteora ETH<br/>Studio 0More',
+      fr: 'Clients sélectionnés:<br/>pool Architekten<br/>a studio – jan de vylder<br/>Meteora ETH<br/>Studio 0More',
+      it: 'Clienti selezionati:<br/>pool Architekten<br/>a studio – jan de vylder<br/>Meteora ETH<br/>Studio 0More',
+      rm: 'Clients tschernids:<br/>pool Architekten<br/>a studio – jan de vylder<br/>Meteora ETH<br/>Studio 0More'
     },
     office: {
-      en: 'Paraclet<br>Geroldstrasse 31b<br>8005 Zurich<br><br>office@paraclet.io<br>',
-      de: 'Paraclet<br>Geroldstrasse 31b<br>8005 Zürich<br><br>office@paraclet.io'
+      en: 'Paraclet<br>Geroldstrasse 31b<br>CH-8005 Zurich<br><br>office@paraclet.io',
+      de: 'Paraclet<br>Geroldstrasse 31b<br>CH-8005 Zürich<br><br>office@paraclet.io',
+      fr: 'Paraclet<br>Geroldstrasse 31b<br>CH-8005 Zurich<br><br>office@paraclet.io',
+      it: 'Paraclet<br>Geroldstrasse 31b<br>CH-8005 Zurigo<br><br>office@paraclet.io',
+      rm: 'Paraclet<br>Geroldstrasse 31b<br>CH-8005 Turitg<br><br>office@paraclet.io'
     }
   };
 
@@ -47,12 +63,21 @@ export default function Home() {
   };
 
   // Toggle language every X seconds
+  // useEffect(() => {
+  //   if (!isVisible) return;
+
+  //   const id = setInterval(() => {setLang((prev) => (prev === 'en' ? 'de' : 'en'));}, 5_000);
+  //   return () => clearInterval(id);
+  // }, [isVisible]);
   useEffect(() => {
     if (!isVisible) return;
-
-    const id = setInterval(() => {setLang((prev) => (prev === 'en' ? 'de' : 'en'));}, 5_000);
+  
+    const id = setInterval(() => {
+      setLangIndex((prev) => (prev + 1) % languages.length);
+    }, 5000);
+  
     return () => clearInterval(id);
-  }, [isVisible]);
+  }, [isVisible]);  
 
   // scramble all three text areas on language change
   useEffect(() => {
