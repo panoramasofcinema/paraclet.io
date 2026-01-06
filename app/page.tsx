@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import ScrambleText from 'scramble-text';
 import usePageVisibility from './usePageVisibility';
 import styles from './page.module.css';
+import Link from "next/link";
 
 
 
@@ -54,13 +55,13 @@ export default function Home() {
       rm: 'Clients tschernids:<br/>pool Architekten<br/>a studio – jan de vylder<br/>Meteora ETH<br/>Studio 0More'
     },
     office: {
-      en: `Paraclet<br>
-        Geroldstrasse 31b<br>
-        CH-8005 Zurich<br><br>
+      en: `Paraclet<br/>
+        Geroldstrasse 31b<br/>
+        CH-8005 Zurich<br><br/>
         <a href="mailto:office@paraclet.io">office@paraclet.io</a>`,
-      de: `Paraclet<br>
-        Geroldstrasse 31b<br>
-        CH-8005 Zürich<br><br>
+      de: `Paraclet<br/>
+        Geroldstrasse 31b<br/>
+        CH-8005 Zürich<br><br/>
         <a href="mailto:office@paraclet.io">office@paraclet.io</a>`,
       fr: 'Paraclet<br>Geroldstrasse 31b<br>CH-8005 Zurich<br><br>office@paraclet.io',
       it: 'Paraclet<br>Geroldstrasse 31b<br>CH-8005 Zurigo<br><br>office@paraclet.io',
@@ -119,10 +120,12 @@ export default function Home() {
         {translations.title[lang]}
       </div>
 
-      <div className={styles.pitch} ref={pitchRef}>
-        {translations.pitch[lang]}
-      </div>
-
+      <Link href="/projects" className={styles.pitch}>
+        <div ref={pitchRef}>
+          {translations.pitch[lang]}
+        </div>
+      </Link>
+      
       <div className={styles.footer}>
         <div className={styles.collaborators} ref={collabRef} dangerouslySetInnerHTML={{ __html: translations.collab[lang] }}></div>
         <div className={styles.office} ref={officeRef} dangerouslySetInnerHTML={{ __html: translations.office[lang] }}></div>
