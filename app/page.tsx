@@ -54,8 +54,14 @@ export default function Home() {
       rm: 'Clients tschernids:<br/>pool Architekten<br/>a studio – jan de vylder<br/>Meteora ETH<br/>Studio 0More'
     },
     office: {
-      en: 'Paraclet<br>Geroldstrasse 31b<br>CH-8005 Zurich<br><br>office@paraclet.io',
-      de: 'Paraclet<br>Geroldstrasse 31b<br>CH-8005 Zürich<br><br>office@paraclet.io',
+      en: `Paraclet<br>
+        Geroldstrasse 31b<br>
+        CH-8005 Zurich<br><br>
+        <a href="mailto:office@paraclet.io">office@paraclet.io</a>`,
+      de: `Paraclet<br>
+        Geroldstrasse 31b<br>
+        CH-8005 Zürich<br><br>
+        <a href="mailto:office@paraclet.io">office@paraclet.io</a>`,
       fr: 'Paraclet<br>Geroldstrasse 31b<br>CH-8005 Zurich<br><br>office@paraclet.io',
       it: 'Paraclet<br>Geroldstrasse 31b<br>CH-8005 Zurigo<br><br>office@paraclet.io',
       rm: 'Paraclet<br>Geroldstrasse 31b<br>CH-8005 Turitg<br><br>office@paraclet.io'

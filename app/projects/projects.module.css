@@ -1,0 +1,31 @@
+.pageContainer {
+  /* border: 1px yellowgreen solid; */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100vh;
+  max-height: 790px;
+  max-width: 1220px;
+}
+
+.pageTitle {
+  /* border: 1px yellowgreen dashed; */
+  margin-top: 24px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.projects {
+  /* border: 1px yellowgreen dashed; */
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top:  auto;
+  margin-bottom: auto;
+}
+
+.cr {
+  /* border: 1px blueviolet dashed; */
+  position: absolute;
+  top: calc(100vh + 10px);
+  left: 30px;
+}
