@@ -60,6 +60,7 @@ export default function ProjectsPage() {
       </div>
 
       <div className={styles.footer}>
+        <div></div>
         <div>
           Paraclet<br/>
           Geroldstrasse 31b<br/>
