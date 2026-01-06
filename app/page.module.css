@@ -9,7 +9,12 @@
 }
 
 .pageTitle {
-  /* position: absolute; */
+  /* border: 1px yellowgreen dashed; */
+  /* font-kerning: normal; */
+  /* font-feature-settings: "kern" 1, "liga" 1; */
+  /* letter-spacing: -0.02em; */
+  /* text-rendering: optimizeLegibility; */
+
   margin-top: 22px;
   margin-left: 30px;
 }

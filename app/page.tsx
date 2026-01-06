@@ -13,10 +13,13 @@ export default function Home() {
   const collabRef = useRef<HTMLDivElement>(null);
   const officeRef = useRef<HTMLDivElement>(null);
 
-  // const [lang, setLang] = useState<'en' | 'de'>('en');
-  const languages: Array<'en'|'de'|'en'|'fr'|'en'|'it'|'en'|'rm'> = ['en','de','en','fr','en','it','en','rm'];
-  const [langIndex, setLangIndex] = useState(0);
-  const lang = languages[langIndex];
+  // Only english and german
+  const [lang, setLang] = useState<'en' | 'de'>('en');
+
+  // Multiple languages
+  // const languages: Array<'en'|'de'|'en'|'fr'|'en'|'it'|'en'|'rm'> = ['en','de','en','fr','en','it','en','rm'];
+  // const [langIndex, setLangIndex] = useState(0);
+  // const lang = languages[langIndex];
 
   const isVisible = usePageVisibility();
 
@@ -63,23 +66,24 @@ export default function Home() {
   };
 
   // Toggle language every X seconds
-  // useEffect(() => {
-  //   if (!isVisible) return;
-
-  //   const id = setInterval(() => {setLang((prev) => (prev === 'en' ? 'de' : 'en'));}, 5_000);
-  //   return () => clearInterval(id);
-  // }, [isVisible]);
   useEffect(() => {
     if (!isVisible) return;
-  
-    const id = setInterval(() => {
-      setLangIndex((prev) => (prev + 1) % languages.length);
-    }, 5000);
-  
-    return () => clearInterval(id);
-  }, [isVisible]);  
 
-  // scramble all three text areas on language change
+    const id = setInterval(() => {setLang((prev) => (prev === 'en' ? 'de' : 'en'));}, 4500);
+    return () => clearInterval(id);
+  }, [isVisible]);
+
+  // useEffect(() => {
+  //   if (!isVisible) return;
+  
+  //   const id = setInterval(() => {
+  //     setLangIndex((prev) => (prev + 1) % languages.length);
+  //   }, 4500);
+  
+  //   return () => clearInterval(id);
+  // }, [isVisible]);  
+
+  // Scramble all three text areas on language change
   useEffect(() => {
     [titleRef, pitchRef, collabRef, officeRef].forEach(ref => {
       if (!ref.current) return;
@@ -109,7 +113,7 @@ export default function Home() {
         <div className={styles.office} ref={officeRef} dangerouslySetInnerHTML={{ __html: translations.office[lang] }}></div>
       </div>
 
-      <div className={styles.cr}>© 2025 Paraclet</div>
+      <div className={styles.cr}>© 2026 Paraclet</div>
     </div>
   )
 }
