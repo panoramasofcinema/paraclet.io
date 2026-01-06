@@ -39,8 +39,16 @@ export default function Home() {
       rm: 'Nus sviluppain soluziuns nativas cun IA per architects ed indeschinaders.'
     },
     collab: {
-      en: 'Selected clients:<br/>pool Architekten<br/>a studio – jan de vylder<br/>Meteora ETH<br/>Studio 0More<br>',
-      de: 'Ausgewählte Kunden:<br/>pool Architekten<br/>a studio – jan de vylder<br/>Meteora ETH<br/>Studio 0More',
+      en: `Selected clients:<br/>
+        <a href="https://www.poolarch.ch/" target="_blank" rel="noopener noreferrer">pool Architekten</a><br/>
+        <a href="https://de-vylder.arch.ethz.ch/" target="_blank" rel="noopener noreferrer">a studio – jan de vylder</a><br/>
+        <a href="https://meteora.ch/" target="_blank" rel="noopener noreferrer">Meteora ETH</a><br/>
+        <a href="https://0more.net/" target="_blank" rel="noopener noreferrer">Studio 0More</a>`,
+      de: `Ausgewählte Kunden:<br/>
+        <a href="https://www.poolarch.ch/" target="_blank" rel="noopener noreferrer">pool Architekten</a><br/>
+        <a href="https://de-vylder.arch.ethz.ch/" target="_blank" rel="noopener noreferrer">a studio – jan de vylder</a><br/>
+        <a href="https://meteora.ch/" target="_blank" rel="noopener noreferrer">Meteora ETH</a><br/>
+        <a href="https://0more.net/" target="_blank" rel="noopener noreferrer">Studio 0More</a>`,
       fr: 'Clients sélectionnés:<br/>pool Architekten<br/>a studio – jan de vylder<br/>Meteora ETH<br/>Studio 0More',
       it: 'Clienti selezionati:<br/>pool Architekten<br/>a studio – jan de vylder<br/>Meteora ETH<br/>Studio 0More',
       rm: 'Clients tschernids:<br/>pool Architekten<br/>a studio – jan de vylder<br/>Meteora ETH<br/>Studio 0More'
@@ -65,21 +73,23 @@ export default function Home() {
     fps: 12
   };
 
-  // Toggle language every X seconds
+  // Toggle english and german
   useEffect(() => {
     if (!isVisible) return;
 
-    const id = setInterval(() => {setLang((prev) => (prev === 'en' ? 'de' : 'en'));}, 4500);
+    const id = setInterval(() => {
+      setLang((prev) => (prev === 'en' ? 'de' : 'en'));
+    }, 4500);
     return () => clearInterval(id);
   }, [isVisible]);
 
+  // Toggle multiple languages
   // useEffect(() => {
   //   if (!isVisible) return;
-  
+
   //   const id = setInterval(() => {
   //     setLangIndex((prev) => (prev + 1) % languages.length);
   //   }, 4500);
-  
   //   return () => clearInterval(id);
   // }, [isVisible]);  
 
@@ -95,7 +105,6 @@ export default function Home() {
       scr.start().play();
     });
   }, [lang]);
-
 
 
   return (
