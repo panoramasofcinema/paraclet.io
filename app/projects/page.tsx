@@ -1,14 +1,48 @@
 'use client';
 
 import { useState, useEffect, useRef } from "react";
+import ScrambleText from "scramble-text";
+import usePageVisibility from '../usePageVisibility';
 import Image from "next/image";
 import styles from "./projects.module.css";
 
 
 export default function ProjectsPage() {
+  const titleRef = useRef<HTMLDivElement>(null);
+  const projectsRef = useRef<HTMLDivElement>(null);
+  const officeRef = useRef<HTMLDivElement>(null);
+  const isVisible = usePageVisibility();
+
   const [showPool, setShowPool] = useState(false);
   const poolButtonRef = useRef<HTMLButtonElement>(null);
 
+  const scrambleOpts = {
+    timeOffset: 16,
+    chars: ['P','a','r','a','c','l','e','t',' '],
+    fps: 12
+  };
+  const scrambleOptsSlow = {
+    timeOffset: 60,
+    chars: ['P','a','r','a','c','l','e','t',' '],
+    fps: 12
+  };
+
+  // Scramble effect
+  useEffect(() => {
+    // if (!isVisible) return;
+
+    [titleRef, projectsRef, officeRef].forEach(ref => {
+    if (!ref.current) return;
+    const opts = ref === titleRef ? scrambleOptsSlow : scrambleOpts;
+    const scr = new ScrambleText(ref.current, {
+      ...opts,
+      callback: () => scr.stop(),
+    });
+    scr.start().play();
+  });
+  }, []);
+  
+  // Modal effect
   useEffect(() => {
     if (!showPool) return;
   
@@ -38,14 +72,13 @@ export default function ProjectsPage() {
   
   
   
-
   return (
     <div className={styles.pageContainer}>
-      <div className={styles.pageTitle}>
+      <div className={styles.pageTitle} ref={titleRef}>
         <a href="https://www.paraclet.io/">Paraclet</a>
       </div>
 
-      <div className={styles.projects}>
+      <div className={styles.projects} ref={projectsRef}>
         Selected projects:<br/>
         <a href="https://marksearch.online/" target="_blank" rel="noopener noreferrer">Mark AI</a><br/>
         <button ref={poolButtonRef} onClick={() => setShowPool(true)} className={styles.projectLink}>
@@ -59,7 +92,7 @@ export default function ProjectsPage() {
 
       <div className={styles.footer}>
         <div></div>
-        <div>
+        <div ref={officeRef}>
           Paraclet<br/>
           Geroldstrasse 31b<br/>
           CH-8005 Zurich<br/><br/>

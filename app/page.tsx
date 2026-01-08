@@ -86,7 +86,7 @@ export default function Home() {
 
     const id = setInterval(() => {
       setLang((prev) => (prev === 'en' ? 'de' : 'en'));
-    }, 4500);
+    }, 5000);
     return () => clearInterval(id);
   }, [isVisible]);
 
@@ -96,7 +96,7 @@ export default function Home() {
 
   //   const id = setInterval(() => {
   //     setLangIndex((prev) => (prev + 1) % languages.length);
-  //   }, 4500);
+  //   }, 5000);
   //   return () => clearInterval(id);
   // }, [isVisible]);  
 
@@ -120,11 +120,9 @@ export default function Home() {
         {translations.title[lang]}
       </div>
 
-      <Link href="/projects" className={styles.pitch}>
-        <div ref={pitchRef}>
-          {translations.pitch[lang]}
-        </div>
-      </Link>
+      <div className={styles.pitch} ref={pitchRef}>
+        <a href="https://www.paraclet.io/projects">{translations.pitch[lang]}</a>
+      </div>
       
       <div className={styles.footer}>
         <div className={styles.collaborators} ref={collabRef} dangerouslySetInnerHTML={{ __html: translations.collab[lang] }}></div>
