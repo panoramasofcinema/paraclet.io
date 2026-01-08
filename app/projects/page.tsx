@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import ScrambleText from "scramble-text";
-import usePageVisibility from '../usePageVisibility';
 import Image from "next/image";
 import styles from "./projects.module.css";
 
@@ -11,7 +10,6 @@ export default function ProjectsPage() {
   const titleRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
   const officeRef = useRef<HTMLDivElement>(null);
-  const isVisible = usePageVisibility();
 
   const [showPool, setShowPool] = useState(false);
   const poolButtonRef = useRef<HTMLButtonElement>(null);
@@ -29,8 +27,6 @@ export default function ProjectsPage() {
 
   // Scramble effect
   useEffect(() => {
-    // if (!isVisible) return;
-
     [titleRef, projectsRef, officeRef].forEach(ref => {
     if (!ref.current) return;
     const opts = ref === titleRef ? scrambleOptsSlow : scrambleOpts;

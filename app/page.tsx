@@ -4,8 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import ScrambleText from 'scramble-text';
 import usePageVisibility from './usePageVisibility';
 import styles from './page.module.css';
-import Link from "next/link";
-
 
 
 export default function Home() {
