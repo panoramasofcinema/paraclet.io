@@ -8,8 +8,11 @@ import styles from "./projects.module.css";
 
 export default function ProjectsPage() {
   const titleRef = useRef<HTMLDivElement>(null);
-  const projectsRef = useRef<HTMLDivElement>(null);
   const officeRef = useRef<HTMLDivElement>(null);
+
+  const projectsOverlayRef = useRef<HTMLDivElement>(null);
+  const [showProjectsOverlay, setShowProjectsOverlay] = useState(true);
+  const [projectsOverlayDone, setProjectsOverlayDone] = useState(false);
 
   const [showPool, setShowPool] = useState(false);
   const poolButtonRef = useRef<HTMLButtonElement>(null);
@@ -19,26 +22,54 @@ export default function ProjectsPage() {
     chars: ['P','a','r','a','c','l','e','t',' '],
     fps: 12
   };
+
   const scrambleOptsSlow = {
     timeOffset: 60,
     chars: ['P','a','r','a','c','l','e','t',' '],
     fps: 12
   };
 
+  const projectsOverlayHTML = `
+    Selected projects:<br/>
+    Mark AI<br/>
+    <button class="${styles.projectLink}" type="button" tabindex="-1">pool Architekten</button><br/>
+    Office for Metropolitan Architecture OMA<br/>
+    round a round<br/>
+    Panoramas of Cinema<br/>
+    Search 0More
+  `;
+
   // Scramble effect
   useEffect(() => {
-    [titleRef, projectsRef, officeRef].forEach(ref => {
-    if (!ref.current) return;
-    const opts = ref === titleRef ? scrambleOptsSlow : scrambleOpts;
-    const scr = new ScrambleText(ref.current, {
-      ...opts,
-      callback: () => scr.stop(),
+    [titleRef, officeRef].forEach(ref => {
+      if (!ref.current) return;
+
+      const opts = ref === titleRef ? scrambleOptsSlow : scrambleOpts;
+      const scr = new ScrambleText(ref.current, {
+        ...opts,
+        callback: () => scr.stop(),
+      });
+      scr.start().play();
     });
+  }, []);
+
+  // Scramble effect: projects list
+  useEffect(() => {
+    if (!projectsOverlayRef.current) return;
+
+    const scr = new ScrambleText(projectsOverlayRef.current, {
+      ...scrambleOpts,
+      callback: () => {
+        scr.stop();
+        setProjectsOverlayDone(true);
+        window.setTimeout(() => setShowProjectsOverlay(false), 250);
+      },
+    });
+
     scr.start().play();
-  });
   }, []);
   
-  // Modal effect
+  // Modal effect for pool image
   useEffect(() => {
     if (!showPool) return;
   
@@ -74,16 +105,35 @@ export default function ProjectsPage() {
         <a href="https://www.paraclet.io/">Paraclet</a>
       </div>
 
-      <div className={styles.projects} ref={projectsRef}>
-        Selected projects:<br/>
-        <a href="https://marksearch.online/" target="_blank" rel="noopener noreferrer">Mark AI</a><br/>
-        <button ref={poolButtonRef} onClick={() => setShowPool(true)} className={styles.projectLink}>
-          pool Architekten
-        </button><br/>
-        <a href="https://oma.marksearch.online/" target="_blank" rel="noopener noreferrer">Office for Metropolitan Architecture OMA</a><br/>
-        <a href="https://jdv.marksearch.online/" target="_blank" rel="noopener noreferrer">round a round</a><br/>
-        <a href="https://panoramasofcinema.ch/" target="_blank" rel="noopener noreferrer">Panoramas of Cinema</a><br/>
-        <a href="https://search.0more.net/" target="_blank" rel="noopener noreferrer">Search 0More</a><br/>
+      <div className={styles.projectsWrap}>
+        <div className={styles.projects}>
+          Selected projects:<br/>
+          <a href="https://marksearch.online/" target="_blank" rel="noopener noreferrer">Mark AI</a><br/>
+          <button
+            ref={poolButtonRef}
+            onClick={() => setShowPool(true)}
+            className={styles.projectLink}
+            type="button"
+          >
+            pool Architekten
+          </button><br/>
+          <a href="https://oma.marksearch.online/" target="_blank" rel="noopener noreferrer">Office for Metropolitan Architecture OMA</a><br/>
+          <a href="https://jdv.marksearch.online/" target="_blank" rel="noopener noreferrer">round a round</a><br/>
+          <a href="https://panoramasofcinema.ch/" target="_blank" rel="noopener noreferrer">Panoramas of Cinema</a><br/>
+          <a href="https://search.0more.net/" target="_blank" rel="noopener noreferrer">Search 0More</a>
+        </div>
+
+        {showProjectsOverlay && (
+          <div
+            ref={projectsOverlayRef}
+            className={[
+              styles.projectsOverlay,
+              projectsOverlayDone ? styles.projectsOverlayDone : "",
+            ].join(" ")}
+            aria-hidden
+            dangerouslySetInnerHTML={{ __html: projectsOverlayHTML }}
+          />
+        )}
       </div>
 
       <div className={styles.footer}>

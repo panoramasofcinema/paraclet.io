@@ -15,12 +15,43 @@
   margin-right: 30px;
 }
 
+.projectsWrap {
+  position: relative;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 .projects {
   /* border: 1px yellowgreen dashed; */
   margin-left: 30px;
   margin-right: 30px;
-  margin-top:  auto;
-  margin-bottom: auto;
+}
+
+.projectsOverlay {
+  position: absolute;
+  inset: 0;
+  margin-left: 30px;
+  margin-right: 30px;
+  background-color: #FBFBFB;
+
+  font: inherit;
+  color: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+
+  /* white-space: normal; */
+  pointer-events: none;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 250ms ease;
+}
+
+.projectsOverlay button {
+  pointer-events: none;
+}
+
+.projectsOverlayDone {
+  opacity: 0;
 }
 
 .projectLink {
