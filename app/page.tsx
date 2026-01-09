@@ -118,8 +118,10 @@ export default function Home() {
         {translations.title[lang]}
       </div>
 
-      <div className={styles.pitch} ref={pitchRef}>
-        <a href="https://www.paraclet.io/projects">{translations.pitch[lang]}</a>
+      <div className={styles.pitch}>
+        <a href="https://www.paraclet.io/projects">
+          <span ref={pitchRef}>{translations.pitch[lang]}</span>
+        </a>
       </div>
       
       <div className={styles.footer}>
