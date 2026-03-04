@@ -46,7 +46,7 @@
 .footer {
   /* border: 1px blueviolet dashed; */
   position: absolute;
-  top: calc(100vh + 10px);
+  top: calc(100vh + 24px);
   width: 100%;
 
   padding-left: 30px;
@@ -68,7 +68,8 @@
 }
 
 @media (max-width: 768px) {
-  .footer {
-    hyphens: none;
+  .collaborators {
+    hyphens: auto;
+    min-height: 153px; /* hack */
   }
 }

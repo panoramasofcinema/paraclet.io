@@ -54,11 +54,11 @@ export default function Home() {
     office: {
       en: `Paraclet<br/>
         Geroldstrasse 31b<br/>
-        CH-8005 Zürich<br><br/>
+        CH-8005 Zürich<br>
         <a href="mailto:office@paraclet.io">office@paraclet.io</a>`,
       de: `Paraclet<br/>
         Geroldstrasse 31b<br/>
-        CH-8005 Zürich<br><br/>
+        CH-8005 Zürich<br>
         <a href="mailto:office@paraclet.io">office@paraclet.io</a>`,
     }
   };
