@@ -56,11 +56,13 @@ export default function Home() {
       en: `Paraclet<br/>
         Geroldstrasse 31b<br/>
         CH-8005 Zurich<br>
-        <a href="mailto:office@paraclet.io">office@paraclet.io</a>`,
+        <a href="mailto:office@paraclet.io">office@paraclet.io</a><br><br>
+        © 2026 Paraclet`,
       de: `Paraclet<br/>
         Geroldstrasse 31b<br/>
         CH-8005 Zürich<br>
-        <a href="mailto:office@paraclet.io">office@paraclet.io</a>`,
+        <a href="mailto:office@paraclet.io">office@paraclet.io</a><br><br>
+        © 2026 Paraclet`,
     },
     cr: {
       en: `© 2026 Paraclet`,
@@ -91,7 +93,7 @@ export default function Home() {
 
   // Scramble all text areas on language change
   useEffect(() => {
-    [titleRef, pitchRef, collabRef, projectsRef, officeRef, crRef].forEach(ref => {
+    [titleRef, pitchRef, collabRef, projectsRef,].forEach(ref => {
       if (!ref.current) return;
       const opts = (ref === titleRef || ref === crRef) ? scrambleOptsSlow : scrambleOpts;
       const scr = new ScrambleText(ref.current, {
@@ -118,7 +120,7 @@ export default function Home() {
 
       <div className={styles.footer}>
         <div className={styles.office} ref={officeRef} dangerouslySetInnerHTML={{ __html: translations.office[lang] }}></div>
-        <div className={styles.cr} ref={crRef}>{translations.cr[lang]}</div>
+        {/* <div className={styles.cr} ref={crRef}>{translations.cr[lang]}</div> */}
       </div>
     </div>
   )
