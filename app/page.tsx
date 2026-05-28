@@ -42,12 +42,12 @@ export default function Home() {
     },
     projects: {
       en: `Selected projects:<br/>
-        <a href="https://marksearch.online/" target="_blank" rel="noopener noreferrer">Mark</a><br/>
+        <a href="https://marksearch.online/" target="_blank" rel="noopener noreferrer">Mark AI</a><br/>
         <a href="https://jdv.marksearch.online/" target="_blank" rel="noopener noreferrer">round a round</a><br/>
         <a href="https://panoramasofcinema.ch/" target="_blank" rel="noopener noreferrer">Panoramas of Cinema</a><br/>
         <a href="https://search.0more.net/" target="_blank" rel="noopener noreferrer">Search 0More</a>`,
       de: `Ausgewählte Projekte:<br/>
-        <a href="https://marksearch.online/" target="_blank" rel="noopener noreferrer">Mark</a><br/>
+        <a href="https://marksearch.online/" target="_blank" rel="noopener noreferrer">Mark AI</a><br/>
         <a href="https://jdv.marksearch.online/" target="_blank" rel="noopener noreferrer">round a round</a><br/>
         <a href="https://panoramasofcinema.ch/" target="_blank" rel="noopener noreferrer">Panoramas of Cinema</a><br/>
         <a href="https://search.0more.net/" target="_blank" rel="noopener noreferrer">Search 0More</a>`,
